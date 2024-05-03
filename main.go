@@ -8,10 +8,20 @@ import (
 func home(w http.ResponseWriter, r *http.Request) {
 	w.Write([]byte("Hello from go!!"))
 }
+
+func snippetView(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("view snippet"))
+}
+
+func snippetCreate(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte("form for creating snippet"))
+}
 func main() {
 	mux := http.NewServeMux()
-	// catch all
-	mux.HandleFunc("/", home)
+
+	mux.HandleFunc("/{$}", home)
+	mux.HandleFunc("/snippet/view", snippetView)
+	mux.HandleFunc("/snippet/create", snippetCreate)
 
 	log.Print("starting server on :8080")
 
